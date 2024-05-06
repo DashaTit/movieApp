@@ -1,0 +1,55 @@
+main {
+    padding-top: 40px;
+    position: relative;
+}
+
+.movies {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.movie {
+    width: 240px;
+    margin: 30px;
+    position: relative;
+
+    h1 {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        color: @text-color_default;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    img {
+        width: 240px;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.movie__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: @text-color_not-mainstream;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.movie__raiting {
+    display: flex;
+    align-items: center;
+    img {
+        width: 20px;
+        margin-right: 5px;
+    }
+
+    p {
+        color: @text-color_raiting
+    }
+}

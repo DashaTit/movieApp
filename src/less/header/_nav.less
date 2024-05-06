@@ -1,0 +1,114 @@
+@import url("./assets/_colors.less");
+
+.nav {
+    position: relative;
+    background-color: @bg-color_block;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.nav-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-list__burger-menu {
+    width: 30px;
+    height: 30px;
+}
+
+.nav-list__burger-menu span {
+    display: block;
+    margin-bottom: 5px;
+    width: 30px;
+    height: 5px;
+    border-radius: 2px;
+    background-color: @text-color_default;
+}
+
+.nav-list__logo {
+    color: @text-color_accent;
+    font-size: 36px;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    transition: all 0.5s ease-in-out;
+
+    &:hover {
+        cursor: pointer;
+        color: @text-color_default;
+    }
+}
+
+.nav-list__search {
+    background-color: @bg-color;
+    border: 1px solid @text-color_default * 0,5;
+    padding: 15px;
+    border-radius: 10px;
+    color: @text-color_default;
+}
+
+.nav__burger-menu {
+    border: 1px solid @text-color_default;
+    position: absolute;
+    top: 0;
+    left: -100%;
+}
+
+.nav__burger-menu.open {
+    position: absolute;
+    left: 0%;
+    width: 30%;
+    height: 400px;
+    background-color: @bg-color_block;
+
+    transition: all 0.3s ease-in-out;
+}
+
+
+.burger-menu__content {
+    position: relative;
+    padding: 40px;
+}
+
+.burger-menu__text-content {
+    margin-top: 50px;
+    p {
+        color: @text-color_default;
+        margin-top: 15px;
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+        transition: all 0.3s ease-in-out;
+        font-size: 20px;
+
+        &:hover {
+            cursor: pointer;
+            color: @text-color_accent;
+        }
+    }
+}
+
+
+
+.burger-menu__escape {
+    display: flex;
+    justify-content: end;
+
+    &::before, &::after {
+        content: "";
+        position: absolute;
+        border-radius: 5px;
+        // top: 40px;
+        width: 30px;
+        height: 5px;
+        background: @text-color_default;
+        cursor: pointer;
+    }
+    &::before {
+        webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+
+    &::after {
+        webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+}
