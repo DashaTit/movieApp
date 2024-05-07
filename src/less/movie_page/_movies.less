@@ -1,0 +1,75 @@
+.main-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+aside {
+    min-width: 25%;
+    height: 600px;
+    border: 2px solid @text-color_default;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.aside-content {
+    h1 {
+        font-size: 24px;
+        padding-left: 20px;
+        margin-bottom: 40px;
+        border-radius: 5px;
+        background-color: @text-color_accent;
+        height: 50px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.genre_popup {
+    margin-top: 10px;
+    p {
+        border: 2px solid @text-color_default;
+        padding: 10px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.popup_content {
+    display: none;
+    height: 200px;
+    overflow: auto;
+    margin-top: 6px;
+    padding: 20px;
+    box-shadow: @text-color_accent 0px 3px 8px;
+    form:not(:first-child) {
+        margin-top: 10px;
+        margin-left: 10px;
+        input {
+            width: 20px;
+            height: 20px;
+        }
+
+        label {
+            font-size: 16px;
+        }
+    }
+
+    form:first-child {
+        margin-left: 10px;
+        input {
+            width: 20px;
+            height: 20px;
+        }
+
+        label {
+            font-size: 16px;
+        }
+    }
+
+}
+
+.popup_content.open {
+    display: block;
+}

@@ -41,7 +41,7 @@
 
 .nav-list__search {
     background-color: @bg-color;
-    border: 1px solid @text-color_default * 0,5;
+    border: 1px solid @text-color_default * 0, 5;
     padding: 15px;
     border-radius: 10px;
     color: @text-color_default;
@@ -64,7 +64,6 @@
     transition: all 0.3s ease-in-out;
 }
 
-
 .burger-menu__content {
     position: relative;
     padding: 40px;
@@ -73,26 +72,27 @@
 .burger-menu__text-content {
     margin-top: 50px;
     p {
-        color: @text-color_default;
-        margin-top: 15px;
-        font-family:Verdana, Geneva, Tahoma, sans-serif;
-        transition: all 0.3s ease-in-out;
-        font-size: 20px;
+        a {
+            color: @text-color_default;
+            margin-top: 15px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            transition: all 0.3s ease-in-out;
+            font-size: 20px;
 
-        &:hover {
-            cursor: pointer;
-            color: @text-color_accent;
+            &:hover {
+                cursor: pointer;
+                color: @text-color_accent;
+            }
         }
     }
 }
-
-
 
 .burger-menu__escape {
     display: flex;
     justify-content: end;
 
-    &::before, &::after {
+    &::before,
+    &::after {
         content: "";
         position: absolute;
         border-radius: 5px;
