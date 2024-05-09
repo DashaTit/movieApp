@@ -35,10 +35,6 @@ burgerNenuEscape.addEventListener("click", () => {
 // film list
 let c = 1;
 function checkPosition() {
-    let windowRelativeBottom =
-        document.documentElement.getBoundingClientRect().bottom;
-
-
     // если пользователь прокрутил достаточно далеко (< 100px до конца)
     if (
         window.innerHeight + window.scrollY >=
