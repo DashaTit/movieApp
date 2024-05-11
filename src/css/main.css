@@ -325,7 +325,25 @@ aside {
       -ms-flex-align: center;
           align-items: center;
 }
+.show_filers {
+  margin-top: 100%;
+  width: 200px;
+  border: none;
+  outline: none;
+  padding: 15px;
+  background-color: #fe0000;
+  color: #ffffff;
+  border-radius: 10px;
+  font-size: 24px;
+  -webkit-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
+}
+.show_filers:hover {
+  cursor: pointer;
+  border: 1px solid #ffffff;
+}
 .genre_popup {
+  position: relative;
   margin-top: 10px;
 }
 .genre_popup p {
@@ -352,6 +370,9 @@ aside {
   width: 20px;
   height: 20px;
 }
+.popup_content form:not(:first-child) input:checked {
+  background-color: #fe0000;
+}
 .popup_content form:not(:first-child) label {
   font-size: 16px;
 }
@@ -366,6 +387,8 @@ aside {
   font-size: 16px;
 }
 .popup_content.open {
+  position: absolute;
+  width: 300px;
   display: block;
 }
 body {

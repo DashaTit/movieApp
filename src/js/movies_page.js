@@ -42,7 +42,7 @@ function movieRaiting(score) {
     }
 }
 
-async function getMovies(url = filmsURL + c, genres='') {
+async function getMovies(url = filmsURL + c, genres = "") {
     let response = await fetch(url, {
         headers: {
             "Content-Type": "application/json",
@@ -50,14 +50,23 @@ async function getMovies(url = filmsURL + c, genres='') {
         },
     });
     const moviesData = await response.json();
+    console.log(moviesData);
 
     if (genres.length) {
-        document.querySelector(".movies").innerHTML = "";
         showMoviesByGenre(moviesData, genres);
     } else {
-        showMovies(moviesData)
+        showMovies(moviesData);
     }
-    
+}
+
+function getClassByRate(rating) {
+    if (rating >= 7) {
+        return "green";
+    } else if (rating < 7 && rating >= 5) {
+        return "orange";
+    } else {
+        return "red";
+    }
 }
 
 function showMovies(data) {
@@ -74,9 +83,29 @@ function showMovies(data) {
                             <p class="movie__year">${movie.year}</p>
                             <div class="movie__raiting">
                                 <img src="./img/star.svg" alt="">
-                                <p class="score">${movieRaiting(
-                                    movie.ratingKinopoisk
-                                )}</p>
+                            <p class="score">${movieRaiting(
+                                movie.ratingKinopoisk
+                            )}</p>
+                            </div>
+                        </div>`;
+                moviesEl.appendChild(movieEl);
+            }
+        });
+    } else {
+        data.films.forEach((movie, index, item) => {
+            if (movie.type === "FILM") {
+                const movieEl = document.createElement("div");
+                movieEl.classList.add("movie");
+                movieEl.innerHTML = `
+                        <img src="${movie.posterUrl}" alt="">
+                        <h1>${movie.nameRu}</h1>
+                        <div class="movie__info">
+                            <p class="movie__year">${movie.year}</p>
+                            <div class="movie__raiting">
+                                <img src="./img/star.svg" alt="">
+                            <p class="score">${movieRaiting(
+                                movie.ratingKinopoisk
+                            )}</p>
                             </div>
                         </div>`;
                 moviesEl.appendChild(movieEl);
@@ -86,16 +115,18 @@ function showMovies(data) {
 }
 
 function showMoviesByGenre(data, genres) {
+    // document.querySelector(".movies").innerHTML = "";
     const moviesEl = document.querySelector(".movies");
-    const dataId = []
-    genres.forEach(genre => {
-        dataId.push(genreList[genre.id])
-    })
+    const dataId = [];
+    genres.forEach((genre) => {
+        dataId.push(genreList[genre.id]);
+    });
     if (data.items) {
         data.items.forEach((movie) => {
-            const curenMovieGenres = movie.genres.map((genre) => genre.genre)
-            const intersection = dataId.filter(x => curenMovieGenres.includes(x))
-            // console.log(movie.type === "FILM" && intersection.length)
+            const curenMovieGenres = movie.genres.map((genre) => genre.genre);
+            const intersection = dataId.filter((x) =>
+                curenMovieGenres.includes(x)
+            );
             if (movie.type === "FILM" && intersection.length) {
                 // console.log(movie.nameRu, intersection)
                 const movieEl = document.createElement("div");
@@ -109,7 +140,8 @@ function showMoviesByGenre(data, genres) {
                                 <img src="./img/star.svg" alt="">
                                 <p class="score">${movieRaiting(
                                     movie.ratingKinopoisk
-                                )}</p>
+                                )}
+                                </p>
                             </div>
                         </div>`;
                 moviesEl.appendChild(movieEl);
@@ -134,14 +166,15 @@ function throttle(callee, timeout) {
 }
 
 let c = 1;
-
 function checkPosition() {
+    let genre = document.querySelectorAll(":checked");
+    console.log(genre);
     if (
         window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 300
+        document.body.offsetHeight - 500
     ) {
         if (c <= 20) {
-            getMovies(filmsURL + c);
+            getMovies(filmsURL + c, genre);
             c++;
         }
     }
@@ -158,6 +191,7 @@ form.addEventListener("submit", (e) => {
 
     if (search.value) {
         document.querySelector(".movies").innerHTML = "";
+        document.querySelector("input").checked = false;
         getMovies(apiSearchUrl);
     }
 
@@ -174,33 +208,22 @@ genresBtn.addEventListener("click", () => {
 
 // genres
 
-const genresData = [
-    "action",
-    "drama",
-    "military",
-    "history",
-    "fantastic",
-    "adventures",
-    "crime",
-];
-
 import { genreList } from "./genreList.js";
 
+const showBtn = document.querySelector(".show_filers");
 
-// document.addEventListener("click", (e) => {
-//     const checkedBoxes = document.querySelectorAll(":checked");
-//     getMovies(filmsURL, checkedBoxes)
-// });
+showBtn.addEventListener("click", () => {
+    if (document.querySelectorAll(":checked").length) {
+        document.querySelector(".movies").innerHTML = "";
+    } else {
+        document.querySelector(".movies").innerHTML = "";
+        getMovies();
+    }
+});
 
-// вызов
 checkPosition();
+
 (() => {
     window.addEventListener("scroll", throttle(checkPosition, 250));
     window.addEventListener("resize", throttle(checkPosition, 250));
-    document.addEventListener("click", (e) => {
-        const checkedBoxes = document.querySelectorAll(":checked");
-        if (checkedBoxes) {
-            getMovies(filmsURL, checkedBoxes)
-        }
-    });
 })();

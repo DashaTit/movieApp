@@ -24,7 +24,26 @@ aside {
     }
 }
 
+.show_filers {
+    margin-top: 100%;
+    width: 200px;
+    border: none;
+    outline: none;
+    padding: 15px;
+    background-color: @text-color_accent;
+    color: @text-color_default;
+    border-radius: 10px;
+    font-size: 24px;
+    transition: all 0.5s ease-in;
+
+    &:hover {
+        cursor: pointer;
+        border: 1px solid @text-color_default;
+    }
+}
+
 .genre_popup {
+    position: relative;
     margin-top: 10px;
     p {
         border: 2px solid @text-color_default;
@@ -75,5 +94,7 @@ aside {
 }
 
 .popup_content.open {
+    position: absolute;
+    width: 300px;
     display: block;
 }
