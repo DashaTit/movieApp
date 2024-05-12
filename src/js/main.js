@@ -38,7 +38,7 @@ function checkPosition() {
     // если пользователь прокрутил достаточно далеко (< 100px до конца)
     if (
         window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 300
+        document.body.offsetHeight - 100 || window.innerHeight + window.scrollY >=document.body.offsetHeight
     ) {
         // добавим больше данных
         if (c <= 20) {
@@ -88,6 +88,7 @@ function showMovies(data) {
     // document.querySelector(".movies").innerHTML = "";
     if (data.items) {
         data.items.forEach((movie, index, item) => {
+            console.log(movie)
             const movieEl = document.createElement("div");
             movieEl.classList.add("movie");
             movieEl.innerHTML = `
@@ -147,8 +148,8 @@ form.addEventListener("submit", (e) => {
 // start
 checkPosition();
 (() => {
-    window.addEventListener("scroll", throttle(checkPosition, 250));
-    window.addEventListener("resize", throttle(checkPosition, 250));
+    window.addEventListener("scroll", throttle(checkPosition, 100));
+    window.addEventListener("resize", throttle(checkPosition, 100));
 })();
 
 

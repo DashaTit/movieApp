@@ -72,6 +72,7 @@
 .burger-menu__text-content {
     margin-top: 50px;
     p {
+        margin-bottom: 20px;
         a {
             color: @text-color_default;
             margin-top: 15px;
@@ -110,5 +111,17 @@
     &::after {
         webkit-transform: rotate(-45deg);
         transform: rotate(-45deg);
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .nav__burger-menu.open {
+        position: absolute;
+        left: 0%;
+        width: 80%;
+        height: 400px;
+        background-color: @bg-color_block;
+    
+        transition: all 0.3s ease-in-out;
     }
 }

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>main page</title>
+        <link rel="stylesheet" href="./css/main.css" />
+    </head>
+    <body>
+        <nav class="nav">
+            <div class="container">
+                <ul class="nav-list">
+                    <li class="nav-list__item">
+                        <div class="nav-list__burger-menu">
+                            <span class="line"></span>
+                            <span class="line"></span>
+                            <span class="line"></span>
+                        </div>
+                    </li>
+                    <li class="nav-list__item">
+                        <a class="nav-list__logo" href="./index.html"
+                            >MovieApp</a
+                        >
+                    </li>
+                    <li class="nav-list__item">
+                        <form class="nav-list__form" action="">
+                            <input
+                                type="text"
+                                class="nav-list__search"
+                                name=""
+                                placeholder="Искать"
+                                id=""
+                            />
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main>
+            
+            <div class="container">
+                <h1>Фильмы</h1>
+                <h3 class="filter">Фильтр</h3>
+                <div class="main-flex">
+                    <div class="movies"></div>
+                    <aside>
+                        <div class="aside-content">
+                            <h1>Фильтр</h1>
+                            <div class="aside-content__genre">
+                                <h2>Жанры</h2>
+                                <div class="genre_popup">
+                                    <p class="genre_choice">Выберите жанр</p>
+                                    <div class="popup_content">
+                                        <form class="genre-form">
+                                            <input
+                                                id="action"
+                                                type="checkbox"
+                                            />
+                                            <label>Боевик</label>
+                                        </form>
+                                        <form>
+                                            <input id="drama" type="checkbox" />
+                                            <label> Драма</label>
+                                        </form/>
+                                        <form>
+                                            <input
+                                                id="military"
+                                                type="checkbox"
+                                            />
+                                            <label>Военный</label>
+                                        </form>
+                                        <form>
+                                            <input
+                                                id="history"
+                                                type="checkbox"
+                                            />
+                                            <label>История</label>
+                                        </form>
+                                        <form>
+                                            <input
+                                                id="fantastic"
+                                                type="checkbox"
+                                            />
+                                            <label>Фантастика</label>
+                                        </form>
+                                        <form>
+                                            <input
+                                                id="adventures"
+                                                type="checkbox"
+                                            />
+                                            <label>Приключения</label>
+                                        </form>
+                                        <form>
+                                            <input id="crime" type="checkbox" />
+                                            <label>Криминал</label>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="show_filers">Показать</button>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </main>
+
+        <div class="nav__burger-menu">
+            <div class="burger-menu__content">
+                <div class="burger-menu__escape"></div>
+
+                <div class="burger-menu__text-content">
+                    <p><a href="/movies.html">Фильмы</a></p>
+                    <p><a href="./serials.html">Сериалы</a></p>
+                </div>
+            </div>
+        </div>
+        <script type="module" src="./js/movies_page.js"></script>
+    </body>
+</html>

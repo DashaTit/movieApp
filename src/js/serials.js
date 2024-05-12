@@ -73,7 +73,7 @@ function showMovies(data) {
     const moviesEl = document.querySelector(".movies");
     if (data.items) {
         data.items.forEach((movie) => {
-            if (movie.type === "FILM") {
+            if (movie.type === "TV_SERIES") {
                 const movieEl = document.createElement("div");
                 movieEl.classList.add("movie");
                 movieEl.innerHTML = `
@@ -93,7 +93,7 @@ function showMovies(data) {
         });
     } else {
         data.films.forEach((movie, index, item) => {
-            if (movie.type === "FILM") {
+            if (movie.type === "TV_SERIES") {
                 const movieEl = document.createElement("div");
                 movieEl.classList.add("movie");
                 movieEl.innerHTML = `
@@ -127,7 +127,7 @@ function showMoviesByGenre(data, genres) {
             const intersection = dataId.filter((x) =>
                 curenMovieGenres.includes(x)
             );
-            if (movie.type === "FILM" && intersection.length) {
+            if (movie.type === "TV_SERIES" && intersection.length) {
                 // console.log(movie.nameRu, intersection)
                 const movieEl = document.createElement("div");
                 movieEl.classList.add("movie");
@@ -165,13 +165,13 @@ function throttle(callee, timeout) {
     };
 }
 
-let c = 1;
+let c =1
 function checkPosition() {
     let genre = document.querySelectorAll(":checked");
     console.log(genre);
     if (
         window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 500
+        document.body.offsetHeight - 200
     ) {
         if (c <= 20) {
             getMovies(filmsURL + c, genre);
@@ -215,9 +215,10 @@ const showBtn = document.querySelector(".show_filers");
 showBtn.addEventListener("click", () => {
     if (document.querySelectorAll(":checked").length) {
         document.querySelector(".movies").innerHTML = "";
+        getMovies(filmsURL + c, document.querySelectorAll(":checked"));
     } else {
         document.querySelector(".movies").innerHTML = "";
-        getMovies();
+        let c = 1;
     }
 });
 
@@ -227,6 +228,7 @@ checkPosition();
     window.addEventListener("scroll", throttle(checkPosition, 250));
     window.addEventListener("resize", throttle(checkPosition, 250));
 })();
+
 
 // filter btn
 const filterBtn = document.querySelector('.filter')

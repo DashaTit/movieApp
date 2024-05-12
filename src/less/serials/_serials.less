@@ -3,6 +3,10 @@
     justify-content: space-between;
 }
 
+.filter {
+    display: none;
+}
+
 aside {
     min-width: 25%;
     height: 600px;
@@ -25,7 +29,7 @@ aside {
 }
 
 .show_filers {
-    margin-top: 100%;
+    margin-top: 350px;
     width: 200px;
     border: none;
     outline: none;
@@ -56,7 +60,6 @@ aside {
 }
 
 .popup_content {
-    width: 85%;
     display: none;
     height: 200px;
     overflow: auto;
@@ -94,14 +97,35 @@ aside {
 
 }
 
+h1 {
+    font-size: 46px;
+    font-weight: 600;
+    margin-bottom: 40px;
+}
+
 .popup_content.open {
-    max-width: 85%;
     position: absolute;
+    width: 300px;
     display: block;
 }
 
-.filter {
-    display: none;
+
+@media screen and (max-width: 1070px) {
+    .main-flex {
+        display: flex;
+        // justify-content: space-between;
+    }
+    aside {
+        min-width: 45%;
+        height: 600px;
+        border: 2px solid @text-color_default;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .movies {
+        display: block;
+    }
 }
 
 @media screen and (max-width: 770px) {
