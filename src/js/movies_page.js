@@ -171,7 +171,7 @@ function checkPosition() {
     console.log(genre);
     if (
         window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 500
+        document.body.offsetHeight - 1000
     ) {
         if (c <= 20) {
             getMovies(filmsURL + c, genre);
@@ -215,6 +215,8 @@ const showBtn = document.querySelector(".show_filers");
 showBtn.addEventListener("click", () => {
     if (document.querySelectorAll(":checked").length) {
         document.querySelector(".movies").innerHTML = "";
+    let genre = document.querySelectorAll(":checked");
+        getMovies(filmsURL + c, genre);
     } else {
         document.querySelector(".movies").innerHTML = "";
         getMovies();
@@ -234,4 +236,13 @@ const aside = document.querySelector('aside')
 
 filterBtn.addEventListener('click', () => {
     aside.classList.toggle('open')
+})
+
+// film info
+
+window.addEventListener('click', (e) => {
+    // console.log(e.target)
+    let filmId = e.target
+    
+    console.log(filmId.tagName)
 })

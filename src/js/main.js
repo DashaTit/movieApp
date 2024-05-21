@@ -7,6 +7,8 @@ const filmsURL =
     "https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=TOP_POPULAR_ALL&page=";
 const api_url_search =
     "https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=";
+
+const api_id = "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
 // burger menu
 
 function menuEscape() {
@@ -38,16 +40,16 @@ function checkPosition() {
     // если пользователь прокрутил достаточно далеко (< 100px до конца)
     if (
         window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 100 || window.innerHeight + window.scrollY >=document.body.offsetHeight
+            document.body.offsetHeight - 100 ||
+        window.innerHeight + window.scrollY >= document.body.offsetHeight
     ) {
         // добавим больше данных
         if (c <= 20) {
             getMovies(filmsURL + c);
             c++;
-        } 
+        }
     }
 }
-
 
 function movieRaiting(score) {
     if (score == null && score == undefined) {
@@ -88,7 +90,7 @@ function showMovies(data) {
     // document.querySelector(".movies").innerHTML = "";
     if (data.items) {
         data.items.forEach((movie, index, item) => {
-            console.log(movie)
+            console.log(movie);
             const movieEl = document.createElement("div");
             movieEl.classList.add("movie");
             movieEl.innerHTML = `
@@ -103,6 +105,9 @@ function showMovies(data) {
                             )}</p>
                             </div>
                         </div>`;
+            movieEl.addEventListener("click", () =>
+                openModal(movie.kinopoiskId)
+            );
             moviesEl.appendChild(movieEl);
         });
     } else {
@@ -121,10 +126,12 @@ function showMovies(data) {
                             )}</p>
                             </div>
                         </div>`;
+            movieEl.addEventListener("click", () =>
+                openModal(movie.filmId)
+            );
             moviesEl.appendChild(movieEl);
         });
     }
-    
 }
 
 // search
@@ -152,4 +159,58 @@ checkPosition();
     window.addEventListener("resize", throttle(checkPosition, 100));
 })();
 
+const modalEl = document.querySelector(".modal");
 
+async function openModal(id) {
+    modalEl.classList.add("modal--show");
+    document.body.classList.add("stop-scrolling");
+    const resp = await fetch(api_id + id, {
+        headers: {
+            "Content-Type": "application/json",
+            "X-API-KEY": api_key,
+        },
+    });
+    const respData = await resp.json();
+    modalEl.innerHTML = `
+    <div class="modal__card">
+    <div class="modal__card-info">
+    <div class="modal__card-left"><img class="modal__movie-backdrop" src="${
+        respData.posterUrl
+    }" alt="" /></div>
+    <div class"modal__card-right"><h2>
+    <span class="modal__movie-title">${respData.nameRu}</span>, 
+    <span class="modal__movie-release-year">${respData.year}</span>
+</h2>
+<ul class="modal__movie-info">
+    <div class="loader"></div>
+    <li class="modal__movie-genre">Жанр: ${respData.genres.map(
+        (genre) => ` ${genre.genre} `
+    )}</li>
+    <li class="modal__movie-runtime">Время: ${respData.filmLength} минут</li>
+    <li>Cайт: <a class="modal__movie-site" href="">${respData.webUrl}</a></li>
+    <li class="modal__movie-overview">Описание: ${respData.description}</li>
+</ul></div>
+    </div>
+        
+        <button type="button" class="modal__button-close">Закрыть</button>
+    </div>`;
+    const btnClose = document.querySelector(".modal__button-close");
+    btnClose.addEventListener("click", () => closeModal());
+}
+
+function closeModal() {
+    modalEl.classList.remove("modal--show");
+    document.body.classList.remove("stop-scrolling");
+}
+
+window.addEventListener("click", (e) => {
+    if (e.target === modalEl) {
+        closeModal();
+    }
+});
+
+window.addEventListener("keydown", (e) => {
+    if (e.keyCode === 27) {
+        closeModal();
+    }
+});
